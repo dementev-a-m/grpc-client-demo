@@ -1,0 +1,17 @@
+syntax = "proto3";
+package inno.tech.grpcserverdemo;
+
+message ClientRequest{
+  int64 clientId = 1;
+}
+
+message ClientResponse{
+  int64 clientId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string phoneNumber = 4;
+}
+
+service ClientService{
+  rpc getClient(ClientRequest) returns (ClientResponse);
+}
