@@ -1,17 +1,24 @@
 syntax = "proto3";
-package inno.tech.grpcserverdemo;
 
-message ClientRequest{
+import "google/protobuf/empty.proto";
+package ru.dementev.grpcserverdemo;
+
+message ClientId{
   int64 clientId = 1;
 }
 
-message ClientResponse{
+message Client{
   int64 clientId = 1;
   string firstName = 2;
   string lastName = 3;
   string phoneNumber = 4;
+  int32 age = 5;
 }
 
 service ClientService{
-  rpc getClient(ClientRequest) returns (ClientResponse);
+  rpc get(ClientId) returns (Client);
+  rpc save(Client) returns (google.protobuf.Empty);
+  rpc remove(ClientId) returns (Client);
+  rpc observe(stream ClientId) returns (stream Client);
+
 }
